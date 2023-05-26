@@ -1,0 +1,3 @@
+C:/Users/krehm/Desktop/NTPP19/NTPPG19/cmake-build-debug/CMakeFiles/NTPPG19.dir
+C:/Users/krehm/Desktop/NTPP19/NTPPG19/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/krehm/Desktop/NTPP19/NTPPG19/cmake-build-debug/CMakeFiles/rebuild_cache.dir

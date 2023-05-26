@@ -1,0 +1,69 @@
+                          DOKUMENTACIJA PROJEKTA
+-------------------------------------------------------------------------
+1|Planiranje projekta
+Korisnik može naručiti novu narudžbu lijeka koristeći funkcionalnosti Sistema za upravljanje ljekarnama.
+
+Da bi to učinio, korisnik mora dostaviti broj narudžbe, naziv, datum, broj lijeka i izbor lijeka. Unošenjem broja narudžbe korisnik može obrisati najnoviju narudžbu lijeka.
+
+On ili ona moraju unijeti svaki zapis o prodaji u prikaz liste kako bi promijenili aranžman. Plaćanje se vrši iz područja prijema nakon preuzimanja narudžbi. Sistem od vas traži broj računa u području računa. Sistem tada prikazuje cijeli račun, koji uključuje vrstu lijeka, naziv, količinu i ukupnu cijenu.
+
+2|Uvoz biblioteka
+Prvi korak je da odredimo koje su C++ biblioteke potrebne za pokretanje našeg programa. Ovo će biti na početku prezentacije.
+
+Šta je C++ biblioteka?
+C++ biblioteka sadrži kod koji se može koristiti u različitim projektima. Biblioteka obično sadrži metode i klase koje se bave generičkom procedurom koju će mnogi programeri vjerovatno koristiti. C++, na primjer, uključuje biblioteke za obradu ulaza i izlaza, što je uobičajen zadatak u mnogim programima.
+
+U sažetku
+Konačna karakteristika projekta je mogućnost da se ispita sažetak ukupne prodaje. U prikazu liste, ovaj dio prikazuje svaki zapis o prodaji. Podaci se trajno pohranjuju u sistemu bez upotrebe bilo kakvih vanjskih datoteka.
+-------------------------------------------------------------------------
+
+              PRAĆENJE IZMJENA NA ORIGINALNOJ VERZIJI KODA
+-------------------------------------------------------------------------
+>> Prva izmjena na originalnoj verziji koda:
+Ovaj dio koda predstavlja osnovnu strukturu programa za vođenje apoteke. Detaljno objašnjenje onoga što smo uradili do sada, cilja koda i plana za nastavak bi bilo >>
+
+Uključili smo potrebne biblioteke:
+
+#include <_______>...
+
+iostream: omogućava unos i ispis podataka s konzole.
+stdlib.h: omogućava korištenje funkcije system() za manipulaciju operativnim sistemom.
+string: omogućava rad s nizovima znakova (stringovima).
+cctype: omogućava rad s karakterima, poput provjere je li karakter slovo.
+cmath: omogućava korištenje matematičkih funkcija poput sqrt(), sin(), cos(), itd.
+cstdio: omogućava ulazno-izlazne operacije.
+fstream: omogućava rad s datotekama, odnosno ulazno-izlazne operacije s datotekama.
+iomanip: omogućava formatiranje ispisa.
+
+Definirali smo simbol max kao 10, što predstavlja maksimalni broj elemenata u nizu.
+
+Deklarirali smo klasu MedType koja će sadržavati funkcionalnosti za upravljanje narudžbama lijekova:
+
+void _______();...
+
+order(): metoda za unos nove narudžbe lijeka.
+delete_item(): metoda za brisanje posljednje narudžbe lijeka.
+update_order(): metoda za izmjenu liste narudžbi.
+order_list(): metoda za ispisivanje liste narudžbi.
+summary(): metoda za dnevni pregled ukupne prodaje.
+quit(): metoda za izlaz iz programa.
+
+Implementirali smo konstruktor klase MedType, ali u ovom trenutku nema specifične funkcionalnosti.
+
+U funkciji main():
+
+Postavili smo boju konzole na crnu pozadinu i bijeli tekst pomoću system("COLOR 5'").
+Kreirali smo objekt medicine klase MedType.
+Deklarirali smo varijablu menu koja će čuvati korisnikov izbor.
+
+U petlji do-while:
+
+Očistili smo ekran konzole pomoću system("cls").
+Ispisali smo naziv programa i linije razdjeljivača za estetski izgled.
+Ispisali smo izbornik opcija koje korisnik može odabrati.
+
+Zatražili smo unos korisnikovog izbora i spremili ga u varijablu menu.
+
+Trenutno, nemamo implementiranu logiku za obradu izbora korisnika. Sljedeći korak je dodati tu logiku, što podrazumijeva pozivanje odgovarajućih metoda iz klase MedType ovisno o izboru korisnika.
+
+Nastavak rada će se fokusirati na implementaciju logike za svaku opciju izbornika. To će uključivati implementaciju metoda klase MedType za unos nove narudžbe, brisanje narudžbe, izmjenu liste narudžbi, ispisivanje liste narudžbi, pregled ukupne prodaje te izlaz iz programa.

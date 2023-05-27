@@ -70,3 +70,10 @@ Nastavak rada će se fokusirati na implementaciju logike za svaku opciju izborni
 
 >> Druga izmjena na originalnoj verziji koda:
 U ovom dijelu koda >> switch (menu).. koristi se kontrolna struktura switch-case kako bi se odabrala odgovarajuća akcija na temelju unosa korisnika (menu). Svaki slučaj ima svoju specifičnu akciju koja se izvršava pozivom odgovarajuće metode objekta medicine. U slučaju nepostojećeg izbora ispisuje se poruka o neispravnom unosu. Nakon toga se petlja ponavlja sve dok se ne odabere opcija za izlaz iz programa (menu == 6). Nakon izlaska iz petlje, ispisuje se zahvalna poruka i program se zaustavlja.
+
+>> Treća izmjena na originalnoj verziji koda:
+U ovom dijelu koda >> struct node.. definiran je čvor node koji se koristi za čuvanje podataka o narudžbi lijeka. Struktura node sadrži različite podatkovne članove kao što su broj računa, ime kupca, datum narudžbe, količina lijeka, vrsta lijeka, ime lijeka, cijena lijeka, ukupan iznos narudžbe te pokazivače na prethodni, sljedeći i dodatni čvor.
+
+Nakon toga, slijedi definicija klase MedType. U ovoj klasi se nalazi metoda order() koja se koristi za unos nove narudžbe lijeka. Unutar ove metode vrši se unos detalja narudžbe, poput broja računa, imena kupca, datuma i količine lijeka. Također se izračunava ukupan iznos narudžbe za svaki lijek. Nakon unosa, narudžba se sprema u listu kao novi čvor.
+
+Nadalje, u klasi MedType nalaze se i druge metode kao što su delete_item(), update_order(), order_list(), summary() i quit(). Međutim, važno je napomenuti da ove metode su trenutno samo stubovi i nemaju stvarnu funkcionalnost. One su tu kako bi omogućile uspješnu kompilaciju projekta. Potrebno je implementirati odgovarajuće funkcionalnosti ovih metoda kako bi projekat pravilno funkcionisao.

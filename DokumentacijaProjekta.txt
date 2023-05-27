@@ -67,3 +67,6 @@ Zatražili smo unos korisnikovog izbora i spremili ga u varijablu menu.
 Trenutno, nemamo implementiranu logiku za obradu izbora korisnika. Sljedeći korak je dodati tu logiku, što podrazumijeva pozivanje odgovarajućih metoda iz klase MedType ovisno o izboru korisnika.
 
 Nastavak rada će se fokusirati na implementaciju logike za svaku opciju izbornika. To će uključivati implementaciju metoda klase MedType za unos nove narudžbe, brisanje narudžbe, izmjenu liste narudžbi, ispisivanje liste narudžbi, pregled ukupne prodaje te izlaz iz programa.
+
+>> Druga izmjena na originalnoj verziji koda:
+U ovom dijelu koda >> switch (menu)... koristi se kontrolna struktura switch-case kako bi se odabrala odgovarajuća akcija na temelju unosa korisnika (menu). Svaki slučaj ima svoju specifičnu akciju koja se izvršava pozivom odgovarajuće metode objekta medicine. U slučaju nepostojećeg izbora ispisuje se poruka o neispravnom unosu. Nakon toga se petlja ponavlja sve dok se ne odabere opcija za izlaz iz programa (menu == 6). Nakon izlaska iz petlje, ispisuje se zahvalna poruka i program se zaustavlja.

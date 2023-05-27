@@ -43,8 +43,7 @@ public:
         int i;
         int opcija, kolicina, cijena, None;
 
-        cout << "\nUnesite detalje narudžbe\n";
-        cout << "########################################################################## \n\n";
+        cout << "\nUnesite detalje narudžbe!\n";
 
         node *temp;
         temp = new node;
@@ -126,12 +125,68 @@ public:
             // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
         }
 
-        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
-        // Nije implementirana niti ima stvarnu funkcionalnost.
         void order_list() // Metoda za ispisivanje liste narudžbi
         {
-            // Komentar: Ovde bi trebala biti implementacija poručivanja liste.
-            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+            int i, num, num2;
+            bool found;
+            system("cls");
+            node *temp;
+
+            temp = starting_point;
+            found = false;
+
+            cout << "Unesite broj računa za ispis računa: ";
+            cin >> num2;
+            cout << "\n";
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "\t\t\tOvdje je lista narudžbi" << endl;
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+
+            if (temp == NULL)
+            {
+                cout << "\t\t\tNema narudžbi za prikazivanje\n";
+            }
+            while (temp != NULL && !found)
+            {
+                if (temp->brojRacuna == num2)
+                {
+                    found = true;
+                }
+                else
+                {
+                    temp = temp->next;
+                }
+            }
+            if (found)
+            {
+                cout << "Broj računa: " << temp->brojRacuna << endl;
+                cout << "\n";
+                cout << "Ime kupca: " << temp->imeKupca << endl;
+
+                cout << "Datum narudžbe: " << temp->datum << endl;
+
+                cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                cout << "|  Vrsta lijeka    |     Ime lijeka     |    Količina    |   Ukupna cijena   |" << endl;
+                cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                for (i = 0; i < temp->x; i++)
+                {
+                    cout << "     " << temp->vrstaLijeka << "     " << "  \t\t";
+                    cout << "  " << temp->imeLijeka[temp->menu2[i] - 1] << "\t\t\t  ";
+                    cout << temp->kolicinaLijeka[i] << "\t\t";
+                    cout << temp->iznosNarudzbe[i] << " KM" << endl;
+                    cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                }
+
+                temp->ukupnoNarudzbe = temp->iznosNarudzbe[0] + temp->iznosNarudzbe[1] + temp->iznosNarudzbe[2] + temp->iznosNarudzbe[3] + temp->iznosNarudzbe[4] + temp->iznosNarudzbe[5] + temp->iznosNarudzbe[6] + temp->iznosNarudzbe[7] + temp->iznosNarudzbe[8] + temp->iznosNarudzbe[9];
+                cout << "Ukupan iznos računa: " << temp->ukupnoNarudzbe << " KM" << endl;
+                cout << "Unesite iznos koji trebate platiti: ";
+                cin >> num;
+
+                cout << "\n";
+                cout << "\n";
+                cout << "Plaćanje izvršeno\nZahvaljujemo\n";
+                cout << "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+            }
         }
 
         // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
@@ -165,13 +220,11 @@ int main() {
     do {
         system("cls"); // Čisti ekran konzole
         cout << "\t\t\t    Sistem za vođenje apoteke \n"; // Ispisuje naziv programa
-        cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n"; // Ispisuje liniju razdjeljivača
         cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n"; // Ispisuje liniju razdjeljivača
         cout << "\t\t\t1. Unesi novu narudžbu lijeka \t\t\n"; // Ispisuje opciju za unos nove narudžbe
         cout << "\t\t\t2. Obriši posljednju narudžbu lijeka\t\t\n"; // Ispisuje opciju za brisanje posljednje narudžbe
         cout << "\t\t\t3. Izmijeni listu narudžbi \t\t\t\n"; // Ispisuje opciju za izmjenu liste narudžbi
-        cout
-                << "\t\t\t4. Ispiši račun i izvrši plaćanje \t\n"; // Ispisuje opciju za ispis računa i izvršavanje plaćanja
+        cout << "\t\t\t4. Ispiši račun i izvrši plaćanje \t\n"; // Ispisuje opciju za ispis računa i izvršavanje plaćanja
         cout << "\t\t\t5. Dnevni pregled ukupne prodaje \t\t \n"; // Ispisuje opciju za dnevni pregled ukupne prodaje
         cout << "\t\t\t6. Izlaz\t\t\t\t\t\n"; // Ispisuje opciju za izlaz iz programa
         cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n"; // Ispisuje liniju razdjeljivača

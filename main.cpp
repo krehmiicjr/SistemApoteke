@@ -7,19 +7,148 @@
 #include <fstream> // Za rad s datotekama (ulazno-izlazne operacije s datotekama)
 #include <iomanip> // Za formatiranje ispisa
 
-#define max 10 // Definicija maksimalnog broja elemenata u nizu
+#define MAX 10 // Definicija maksimalnog broja elemenata u nizu
 
 using namespace std;
 
-class MedType
+// Definicija strukture 'node' za čuvanje podataka o narudžbi lijeka
+struct node
 {
+    int brojRacuna; // Broj računa
+    string imeKupca; // Ime kupca
+    string datum; // Datum narudžbe
+    int kolicinaLijeka[10]; // Količina lijeka
+    string vrstaLijeka = {"OTC"}; // Vrsta lijeka (over-the-counter)
+    int x, menu2[10]; // Dodatne varijable za unos
+    double iznosNarudzbe[10]; // Iznos narudžbe za svaki lijek
+    string imeLijeka[MAX] = { "Lijek1", "Lijek2", "Lijek3", "Lijek4", "Lijek5", "Lijek6", "Lijek7", "Lijek8", "Lijek9", "Lijek10" }; // Imena lijekova
+    double cijenaLijeka[MAX] = { 1.50, 2.20, 3.00, 2.80, 1.90, 4.50, 3.70, 2.40, 1.80, 3.20 }; // Cijene lijekova
+    double ukupnoNarudzbe; // Ukupan iznos narudžbe
+
+    node *prev; // Pokazivač na prethodni čvor
+    node *next; // Pokazivač na sljedeći čvor
+    node *link; // Dodatni pokazivač
+
+}*q, *temp;
+
+node *starting_point = NULL; // Pokazivač na početni čvor
+node *head_point = NULL; // Pokazivač na glavni čvor
+node *lasting_point = NULL; // Pokazivač na zadnji čvor
+
+class MedType {
 public:
-    void order(); // Metoda za unos nove narudžbe lijeka
-    void delete_item(); // Metoda za brisanje posljednje narudžbe lijeka
-    void update_order(); // Metoda za izmjenu liste narudžbi
-    void order_list(); // Metoda za ispisivanje liste narudžbi
-    void summarry(); // Metoda za dnevni pregled ukupne prodaje
-    void quit(); // Metoda za izlaz iz programa
+    void order() // Metoda za unos nove narudžbe lijeka
+    {
+        system("cls");
+        int i;
+        int opcija, kolicina, cijena, None;
+
+        cout << "\nUnesite detalje narudžbe\n";
+        cout << "########################################################################## \n\n";
+
+        node *temp;
+        temp = new node;
+
+        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+        cout << "ID LIJEKA" << "\tVRSTA LIJEKA" << "\t\tIME LIJEKA" << "           CIJENA LIJEKA(KM)"
+             << endl; // Ispis zaglavlja tablice
+        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+        cout << "0001" << "\t" << "\tOTC" << "\t\t" << "    Lijek1" << "			1.50 KM" << endl; // Lijek1
+        cout << "0002" << "\t" << "\tOTC" << "\t\t" << "    Lijek2" << "			2.20 KM" << endl; // Lijek2
+        cout << "0003" << "\t" << "\tOTC" << "\t\t" << "    Lijek3" << "			3.00 KM" << endl; // Lijek3
+        cout << "0004" << "\t" << "\tOTC" << "\t\t" << "    Lijek4" << "			2.80 KM" << endl; // Lijek4
+        cout << "0005" << "\t" << "\tOTC" << "\t\t" << "    Lijek5" << "			1.90 KM" << endl; // Lijek5
+        cout << "0006" << "\t" << "\tOTC" << "\t\t" << "    Lijek6" << "			4.50 KM" << endl; // Lijek6
+        cout << "0007" << "\t" << "\tOTC" << "\t\t" << "    Lijek7" << "			3.70 KM" << endl; // Lijek7
+        cout << "0008" << "\t" << "\tOTC" << "\t\t" << "    Lijek8" << "			2.40 KM" << endl; // Lijek8
+        cout << "0009" << "\t" << "\tOTC" << "\t\t" << "    Lijek9" << "			1.80 KM" << endl; // Lijek9
+        cout << "0010" << "\t" << "\tOTC" << "\t\t" << "    Lijek10" << "                     3.20 KM" << endl; // Lijek10
+        cout << " " << endl;
+
+        temp = new node;
+        cout << "Unesite broj narudžbe: ";
+        cin >> temp->brojRacuna;
+        cout << "Unesite ime kupca: ";
+        cin >> temp->imeKupca;
+        cout << "Unesite datum: ";
+        cin >> temp->datum;
+        cout << "Koliko lijekova želite naručiti:" << endl;
+        cout << "(Maksimalno je 10 lijekova po narudžbi)\n";
+        cout << "  ";
+        cin >> temp->x;
+        if (temp->x > 10) {
+            cout << "Količina lijekova koje naručujete premašuje maksimalni broj narudžbi!";
+            system("pause");
+        } else {
+            for (i = 0; i < temp->x; i++) {
+
+                cout << "Unesite svoj odabir: "; // Unos odabira lijeka
+                cin >> temp->menu2[i];
+
+                cout << "Ime lijeka: " << temp->imeLijeka[temp->menu2[i] - 1] << endl;  // Ispis imena odabranog lijeka
+                cout << "Koliko lijekova želite: ";
+                cin >> temp->kolicinaLijeka[i];  // Unos količine lijeka
+                temp->iznosNarudzbe[i] =
+                        temp->kolicinaLijeka[i] * temp->cijenaLijeka[temp->menu2[i] - 1];  // Izračunaj ukupan iznos
+                cout << "Iznos koji trebate platiti: " << temp->iznosNarudzbe[i] << " KM"
+                     << endl;  // Ispis ukupnog iznosa
+                system("PAUSE");
+
+            }
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "Narudžba uspješno zabilježena" << endl;
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "Idite na izbornik računa za plaćanje računa" << endl;
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            system("PAUSE");
+
+            temp->next = NULL;
+            if (starting_point != NULL) {
+                temp->next = starting_point;
+            }
+            starting_point = temp;
+            system("cls");
+        }
+    }
+        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
+        // Nije implementirana niti ima stvarnu funkcionalnost.
+        void delete_item() // Metoda za brisanje posljednje narudžbe lijeka
+        {
+            // Komentar: Ovde bi trebala biti implementacija brisanja stavke.
+            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+        }
+
+        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
+        // Nije implementirana niti ima stvarnu funkcionalnost.
+        void update_order() // Metoda za izmjenu liste narudžbi
+        {
+            // Komentar: Ovde bi trebala biti implementacija ažuriranja redosleda.
+            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+        }
+
+        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
+        // Nije implementirana niti ima stvarnu funkcionalnost.
+        void order_list() // Metoda za ispisivanje liste narudžbi
+        {
+            // Komentar: Ovde bi trebala biti implementacija poručivanja liste.
+            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+        }
+
+        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
+        // Nije implementirana niti ima stvarnu funkcionalnost.
+        void summary() // Metoda za dnevni pregled ukupne prodaje
+        {
+            // Komentar: Ovde bi trebala biti implementacija generisanja rezimea.
+            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+        }
+
+        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
+        // Nije implementirana niti ima stvarnu funkcionalnost.
+        void quit() // Metoda za izlaz iz programa
+        {
+            // Komentar: Ovde bi trebala biti implementacija zatvaranja programa.
+            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+        }
     MedType(); // Konstruktor klase MedType
 };
 
@@ -80,7 +209,7 @@ int main() {
 
             case 5: {
                 // Ako je izabrana opcija 5, poziva se metoda za dnevni pregled ukupne prodaje
-                medicine.summarry();
+                medicine.summary();
                 system("PAUSE");
                 break;
             }
@@ -105,7 +234,4 @@ int main() {
     cout << "Zahvaljujemo!" << endl;
     system("PAUSE");
     return 0;
-    }
-
-    return 0; // Završava izvršavanje programa
 }

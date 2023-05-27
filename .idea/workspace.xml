@@ -21,7 +21,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a39c8841-355a-48b7-966e-fd397a8b3266" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/DokumentacijaProjekta.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DokumentacijaProjekta.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/NTPPG19.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/NTPPG19.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +92,7 @@
       <updated>1685118967278</updated>
       <workItem from="1685119014983" duration="1036000" />
       <workItem from="1685123041104" duration="6942000" />
-      <workItem from="1685203433390" duration="5168000" />
+      <workItem from="1685203433390" duration="6342000" />
     </task>
     <servers />
   </component>

@@ -6,7 +6,7 @@
 #include <cstdio> // Za ulazno-izlazne operacije
 #include <fstream> // Za rad s datotekama (ulazno-izlazne operacije s datotekama)
 #include <iomanip> // Za formatiranje ispisa
-
+#include <vector>
 #define MAX 10 // Definicija maksimalnog broja elemenata u nizu
 
 using namespace std;

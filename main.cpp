@@ -109,20 +109,134 @@ public:
             system("cls");
         }
     }
-        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
-        // Nije implementirana niti ima stvarnu funkcionalnost.
-        void delete_item() // Metoda za brisanje posljednje narudžbe lijeka
-        {
-            // Komentar: Ovde bi trebala biti implementacija brisanja stavke.
-            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+
+    void delete_item() // Metoda za brisanje posljednje narudžbe lijeka
+    {
+	system("cls"); // Briše sadržaj konzole
+	int i, num, count;
+    cout << "Unesite podatak koji želite izbrisati:\n";
+    cin >> num;
+    node *q;
+	node *temp;
+	bool found;
+
+	if (starting_point == NULL)
+		cerr << "Nemoguće je izbrisati iz prazne liste.\n";
+	else
+	{
+		if (starting_point->brojRacuna == num) // Ako je prvi element liste jednak broju koji želimo izbrisati
+		{
+			q = starting_point;
+			starting_point = starting_point->next; // Promjena početne tačke na sljedeći element
+			count--;
+			if (starting_point == NULL)
+				lasting_point = NULL;
+			delete q; // Oslobađanje memorije prvog elementa
+			cout << "Račun je uspješno obrisan" << endl;
+		}
+		else
+		{
+			found = false;
+			temp = starting_point;
+			q = starting_point->next;
+
+			while ((!found) && (q != NULL)) // Traženje broja koji želimo izbrisati u ostatku liste
+			{
+				if (q->brojRacuna != num)
+				{
+					temp = q;
+					q = q->next;
+				}
+				else
+					found = true;
+			}
+
+			if (found) // Ako je broj pronađen
+			{
+				temp->next = q->next; // Preskakanje čvora koji sadrži broj koji želimo izbrisati
+				count--;
+
+				if (lasting_point == q)
+					lasting_point = temp; // Ako je posljednji element lista, ažuriraj posljednju tačku
+				delete q; // Oslobađanje memorije čvora koji sadrži broj koji želimo izbrisati
+				cout << "Račun je uspješno obrisan" << endl;
+			}
+			else
+				cout << "Stavka koju želite izbrisati se ne nalazi u listi." << endl;
+		}
+	}
+
         }
 
-        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
-        // Nije implementirana niti ima stvarnu funkcionalnost.
-        void update_order() // Metoda za izmjenu liste narudžbi
-        {
-            // Komentar: Ovde bi trebala biti implementacija ažuriranja redosleda.
-            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
+    void update_order() // Metoda za izmjenu liste narudžbi
+    {
+	system("cls"); // Briše sadržaj konzole
+	int i, ch, sid;
+	bool found;
+	found = false;
+	temp = starting_point;
+	cout << "Unesite broj računa za izmjenu: ";
+	cin >> sid;
+	if (temp == NULL && sid == 0)
+	{
+		cout << "NEMA ZAPISA ZA IZMJENU..!" << endl;
+	}
+	else
+	{
+		while (temp != NULL && !found)
+		{
+			if (temp->brojRacuna == sid)
+			{
+				found = true;
+			}
+			else
+			{
+				temp = temp->next;
+			}
+		}
+		if (found)
+		{
+			cout << "Promijeni broj računa: ";
+			cin >> temp->brojRacuna;
+			cout << "Promijeni ime kupca: ";
+			cin >> temp->imeKupca;
+			cout << "Promijeni datum: ";
+			cin >> temp->datum;
+			cout << "Koliko novih lijekova želite promijeniti:" << endl;
+			cout << "(Maksimalno 10 narudžbi po transakciji)\n";
+			cout << "  ";
+			cin >> temp->x;
+			if (temp->x > 10)
+			{
+				cout << "Količina lijekova koje ste naručili premašuje maksimalni iznos narudžbe!";
+				system("pause");
+			}
+			else
+			{
+				for (i = 0; i < temp->x; i++)
+				{
+					cout << "Unesite svoj odabir za promjenu: " << endl;
+					cin >> temp->menu2[i];
+					cout << "Promijeni ime lijeka: " << temp->imeLijeka[temp->menu2[i] - 1] << endl;
+					cout << "Koliko novih lijekova želite: ";
+					cin >> temp->kolicinaLijeka[i];
+					temp->iznosNarudzbe[i] = temp->kolicinaLijeka[i] * temp->cijenaLijeka[temp->menu2[i] - 1];
+					cout << "Iznos koji morate platiti nakon izmjene je: " << temp->iznosNarudzbe[i] << " RM" << endl;
+					system("PAUSE");
+				}
+				temp = temp->next;
+				system("cls");
+			}
+			cout << "ZAPIS JE IZMJENJEN....!" << endl;
+		}
+		else
+		{
+			if (temp != NULL && temp->brojRacuna != sid)
+			{
+				cout << "Nevažeći broj računa...!" << endl;
+			}
+		}
+	}
         }
 
         void order_list() // Metoda za ispisivanje liste narudžbi

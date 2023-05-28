@@ -137,3 +137,25 @@ Nakon unosa novih podataka, ažuriraju se odgovarajući elementi u listi.
 Na kraju se ispisuje poruka "ZAPIS JE IZMJENJEN....!".
 
 Ove dvije metode, delete_item i update_order, dodaju korisne funkcionalnosti našem programu, omogućavajući korisnicima da upravljaju podacima o narudžbama na fleksibilan način.
+
+>> Šesta promjena na originalnoj verziji koda:
+Metoda summarry:
+Ova metoda ima zadatak prikazati dnevni pregled svih narudžbi.
+Prvo se provjerava da li postoji barem jedna narudžba u listi.
+Ako lista narudžbi (starting_point) nije prazna, prikazuje se zaglavlje sa naslovom "Evo dnevnog pregleda svih narudžbi".
+Zatim se prolazi kroz sve elemente liste i za svaki element se prikazuju detalji narudžbe:
+Broj računa (brojRacuna)
+Ime kupca (imeKupca)
+Datum narudžbe (datum)
+Za svaku stavku u narudžbi se prikazuju detalji:
+Vrsta lijeka (vrstaLijeka)
+Naziv lijeka (imeLijeka)
+Količina (kolicinaLijeka)
+Ukupna cijena (iznosNarudzbe)
+Nakon prikaza svih stavki u narudžbi, prikazuje se ukupan iznos računa (ukupnoNarudzbe) za tu narudžbu.
+Na kraju se prikazuje razdjeljak i prelazi se na sljedeću narudžbu.
+Ako lista narudžbi (starting_point) jest prazna, prikazuje se poruka "Nema narudžbi za prikazivanje"
+
+Metoda quit:
+Ova metoda ima zadatak prikazati poruku korisniku da je odabrao izlazak iz programa.
+Jednostavno se prikazuje poruka "Izabrali ste izlazak."

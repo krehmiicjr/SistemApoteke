@@ -367,6 +367,65 @@ MedType::MedType()
     // Implementacija konstruktora klase MedType
 }
 
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+struct Pacijent {
+    string ime;
+    string prezime;
+    string datumRodjenja;
+    string adresa;
+    string brojOsiguranja;
+};
+
+void unosPacijenta(vector<Pacijent>& pacijenti) {
+    Pacijent noviPacijent;
+    
+    cout << "Unesite ime pacijenta: ";
+    getline(cin, noviPacijent.ime);
+    
+    cout << "Unesite prezime pacijenta: ";
+    getline(cin, noviPacijent.prezime);
+    
+    cout << "Unesite datum rodjenja pacijenta: ";
+    getline(cin, noviPacijent.datumRodjenja);
+    
+    cout << "Unesite adresu pacijenta: ";
+    getline(cin, noviPacijent.adresa);
+    
+    cout << "Unesite broj osiguranja pacijenta: ";
+    getline(cin, noviPacijent.brojOsiguranja);
+    
+    pacijenti.push_back(noviPacijent);
+    
+    cout << "Pacijent uspesno dodat." << endl;
+}
+
+void prikaziPacijente(const vector<Pacijent>& pacijenti) {
+    for (const Pacijent& pacijent : pacijenti) {
+        cout << "Ime: " << pacijent.ime << endl;
+        cout << "Prezime: " << pacijent.prezime << endl;
+        cout << "Datum rodjenja: " << pacijent.datumRodjenja << endl;
+        cout << "Adresa: " << pacijent.adresa << endl;
+        cout << "Broj osiguranja: " << pacijent.brojOsiguranja << endl;
+        cout << "--------------------------" << endl;
+    }
+}
+
+int main() {
+    vector<Pacijent> pacijenti;
+    
+    unosPacijenta(pacijenti);
+    unosPacijenta(pacijenti);
+    
+    prikaziPacijente(pacijenti);
+    
+    return 0;
+}
+
 int main() {
     system("COLOR 0F"); // Postavlja boju konzole (u ovom slučaju crna pozadina i bijeli tekst)
     MedType medicine; // Kreiranje objekta klase MedType

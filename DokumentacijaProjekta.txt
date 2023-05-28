@@ -104,3 +104,36 @@ Nakon unosa iznosa, prikazuje se poruka o završenom plaćanju i zahvala.
 
 Ovaj dio koda omogućuje korisniku da unese broj računa i dobije detalje o odgovarajućoj narudžbi. 
 Prikazuju se sve stavke narudžbe, ukupan iznos i omogućuje se unos iznosa za plaćanje.
+
+>> Peta izmjena na originalnoj verziji koda:
+U petoj izmjeni originalne verzije koda smo dodali metode delete_item i update_order na GitHub repository. Ove metode pružaju dodatne funkcionalnosti za brisanje i izmjenu podataka o narudžbi u našem programu.
+
+Metoda delete_item omogućava korisniku da izbriše određeni račun iz liste. Evo kako ta metoda radi:
+
+Provjerava se da li lista počinje s praznom vrijednošću (starting_point == NULL). Ako je to slučaj, ispisuje se poruka "Nemoguće je izbrisati iz prazne liste."
+
+Ako lista nije prazna, koristi se varijabla num za unos broja koji korisnik želi izbrisati.
+
+Provjerava se da li je prvi element liste jednak unesenom broju num (starting_point->brojRacuna == num). Ako je to slučaj, prvi element se briše. U suprotnom, pretražuje se lista dok se ne pronađe element s traženim brojem ili se ne dođe do kraja liste.
+
+Ako je element s traženim brojem pronađen, briše se iz liste. Ako je taj element bio posljednji element u listi, ažurira se i lasting_point.
+
+Ako element s traženim brojem nije pronađen, ispisuje se poruka "Stavka koju želite izbrisati se ne nalazi u listi."
+
+Metoda update_order omogućava korisniku da izmijeni podatke o određenoj narudžbi. Evo kako ta metoda radi:
+
+Korisnik unosi broj računa (sid) koji želi izmijeniti.
+
+Provjerava se da li lista počinje s praznom vrijednošću (temp == NULL) i da li je uneseni broj računa jednak nuli (sid == 0). Ako je to slučaj, ispisuje se poruka "NEMA ZAPISA ZA IZMJENU..!".
+
+Ako lista nije prazna, pretražuje se lista dok se ne pronađe element s traženim brojem računa (temp->brojRacuna == sid) ili se ne dođe do kraja liste.
+
+Ako je element s traženim brojem računa pronađen, korisniku se omogućuje unos novih podataka o narudžbi, kao što su broj računa, ime kupca, datum i količina lijekova.
+
+Unos novih lijekova se ograničava na maksimalno 10 narudžbi po transakciji.
+
+Nakon unosa novih podataka, ažuriraju se odgovarajući elementi u listi.
+
+Na kraju se ispisuje poruka "ZAPIS JE IZMJENJEN....!".
+
+Ove dvije metode, delete_item i update_order, dodaju korisne funkcionalnosti našem programu, omogućavajući korisnicima da upravljaju podacima o narudžbama na fleksibilan način.

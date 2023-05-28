@@ -112,157 +112,80 @@ public:
 
     void delete_item() // Metoda za brisanje posljednje narudžbe lijeka
     {
-	system("cls"); // Briše sadržaj konzole
-	int i, num, count;
-    cout << "Unesite podatak koji želite izbrisati:\n";
-    cin >> num;
-    node *q;
-	node *temp;
-	bool found;
+        system("cls"); // Briše sadržaj konzole
+        int i, num, count;
+        cout << "Unesite podatak koji želite izbrisati:\n";
+        cin >> num;
+        node *q;
+        node *temp;
+        bool found;
 
-	if (starting_point == NULL)
-		cerr << "Nemoguće je izbrisati iz prazne liste.\n";
-	else
-	{
-		if (starting_point->brojRacuna == num) // Ako je prvi element liste jednak broju koji želimo izbrisati
-		{
-			q = starting_point;
-			starting_point = starting_point->next; // Promjena početne tačke na sljedeći element
-			count--;
-			if (starting_point == NULL)
-				lasting_point = NULL;
-			delete q; // Oslobađanje memorije prvog elementa
-			cout << "Račun je uspješno obrisan" << endl;
-		}
-		else
-		{
-			found = false;
-			temp = starting_point;
-			q = starting_point->next;
+        if (starting_point == NULL)
+            cerr << "Nemoguće je izbrisati iz prazne liste.\n";
+        else
+        {
+            if (starting_point->brojRacuna == num) // Ako je prvi element liste jednak broju koji želimo izbrisati
+            {
+                q = starting_point;
+                starting_point = starting_point->next; // Promjena početne tačke na sljedeći element
+                count--;
+                if (starting_point == NULL)
+                    lasting_point = NULL;
+                delete q; // Oslobađanje memorije prvog elementa
+                cout << "Račun je uspješno obrisan" << endl;
+            }
+            else
+            {
+                found = false;
+                temp = starting_point;
+                q = starting_point->next;
 
-			while ((!found) && (q != NULL)) // Traženje broja koji želimo izbrisati u ostatku liste
-			{
-				if (q->brojRacuna != num)
-				{
-					temp = q;
-					q = q->next;
-				}
-				else
-					found = true;
-			}
+                while ((!found) && (q != NULL)) // Traženje broja koji želimo izbrisati u ostatku liste
+                {
+                    if (q->brojRacuna != num)
+                    {
+                        temp = q;
+                        q = q->next;
+                    }
+                    else
+                        found = true;
+                }
 
-			if (found) // Ako je broj pronađen
-			{
-				temp->next = q->next; // Preskakanje čvora koji sadrži broj koji želimo izbrisati
-				count--;
+                if (found) // Ako je broj pronađen
+                {
+                    temp->next = q->next; // Preskakanje čvora koji sadrži broj koji želimo izbrisati
+                    count--;
 
-				if (lasting_point == q)
-					lasting_point = temp; // Ako je posljednji element lista, ažuriraj posljednju tačku
-				delete q; // Oslobađanje memorije čvora koji sadrži broj koji želimo izbrisati
-				cout << "Račun je uspješno obrisan" << endl;
-			}
-			else
-				cout << "Stavka koju želite izbrisati se ne nalazi u listi." << endl;
-		}
-	}
-
+                    if (lasting_point == q)
+                        lasting_point = temp; // Ako je posljednji element lista, ažuriraj posljednju tačku
+                    delete q; // Oslobađanje memorije čvora koji sadrži broj koji želimo izbrisati
+                    cout << "Račun je uspješno obrisan" << endl;
+                }
+                else
+                    cout << "Stavka koju želite izbrisati se ne nalazi u listi." << endl;
+            }
         }
+
+    }
 
     void update_order() // Metoda za izmjenu liste narudžbi
     {
-	system("cls"); // Briše sadržaj konzole
-	int i, ch, sid;
-	bool found;
-	found = false;
-	temp = starting_point;
-	cout << "Unesite broj računa za izmjenu: ";
-	cin >> sid;
-	if (temp == NULL && sid == 0)
-	{
-		cout << "NEMA ZAPISA ZA IZMJENU..!" << endl;
-	}
-	else
-	{
-		while (temp != NULL && !found)
-		{
-			if (temp->brojRacuna == sid)
-			{
-				found = true;
-			}
-			else
-			{
-				temp = temp->next;
-			}
-		}
-		if (found)
-		{
-			cout << "Promijeni broj računa: ";
-			cin >> temp->brojRacuna;
-			cout << "Promijeni ime kupca: ";
-			cin >> temp->imeKupca;
-			cout << "Promijeni datum: ";
-			cin >> temp->datum;
-			cout << "Koliko novih lijekova želite promijeniti:" << endl;
-			cout << "(Maksimalno 10 narudžbi po transakciji)\n";
-			cout << "  ";
-			cin >> temp->x;
-			if (temp->x > 10)
-			{
-				cout << "Količina lijekova koje ste naručili premašuje maksimalni iznos narudžbe!";
-				system("pause");
-			}
-			else
-			{
-				for (i = 0; i < temp->x; i++)
-				{
-					cout << "Unesite svoj odabir za promjenu: " << endl;
-					cin >> temp->menu2[i];
-					cout << "Promijeni ime lijeka: " << temp->imeLijeka[temp->menu2[i] - 1] << endl;
-					cout << "Koliko novih lijekova želite: ";
-					cin >> temp->kolicinaLijeka[i];
-					temp->iznosNarudzbe[i] = temp->kolicinaLijeka[i] * temp->cijenaLijeka[temp->menu2[i] - 1];
-					cout << "Iznos koji morate platiti nakon izmjene je: " << temp->iznosNarudzbe[i] << " RM" << endl;
-					system("PAUSE");
-				}
-				temp = temp->next;
-				system("cls");
-			}
-			cout << "ZAPIS JE IZMJENJEN....!" << endl;
-		}
-		else
-		{
-			if (temp != NULL && temp->brojRacuna != sid)
-			{
-				cout << "Nevažeći broj računa...!" << endl;
-			}
-		}
-	}
-        }
-
-        void order_list() // Metoda za ispisivanje liste narudžbi
+        system("cls"); // Briše sadržaj konzole
+        int i, ch, sid;
+        bool found;
+        found = false;
+        temp = starting_point;
+        cout << "Unesite broj računa za izmjenu: ";
+        cin >> sid;
+        if (temp == NULL && sid == 0)
         {
-            int i, num, num2;
-            bool found;
-            system("cls");
-            node *temp;
-
-            temp = starting_point;
-            found = false;
-
-            cout << "Unesite broj računa za ispis računa: ";
-            cin >> num2;
-            cout << "\n";
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
-            cout << "\t\t\tOvdje je lista narudžbi" << endl;
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
-
-            if (temp == NULL)
-            {
-                cout << "\t\t\tNema narudžbi za prikazivanje\n";
-            }
+            cout << "NEMA ZAPISA ZA IZMJENU..!" << endl;
+        }
+        else
+        {
             while (temp != NULL && !found)
             {
-                if (temp->brojRacuna == num2)
+                if (temp->brojRacuna == sid)
                 {
                     found = true;
                 }
@@ -273,51 +196,169 @@ public:
             }
             if (found)
             {
-                cout << "Broj računa: " << temp->brojRacuna << endl;
+                cout << "Promijeni broj računa: ";
+                cin >> temp->brojRacuna;
+                cout << "Promijeni ime kupca: ";
+                cin >> temp->imeKupca;
+                cout << "Promijeni datum: ";
+                cin >> temp->datum;
+                cout << "Koliko novih lijekova želite promijeniti:" << endl;
+                cout << "(Maksimalno 10 narudžbi po transakciji)\n";
+                cout << "  ";
+                cin >> temp->x;
+                if (temp->x > 10)
+                {
+                    cout << "Količina lijekova koje ste naručili premašuje maksimalni iznos narudžbe!";
+                    system("pause");
+                }
+                else
+                {
+                    for (i = 0; i < temp->x; i++)
+                    {
+                        cout << "Unesite svoj odabir za promjenu: " << endl;
+                        cin >> temp->menu2[i];
+                        cout << "Promijeni ime lijeka: " << temp->imeLijeka[temp->menu2[i] - 1] << endl;
+                        cout << "Koliko novih lijekova želite: ";
+                        cin >> temp->kolicinaLijeka[i];
+                        temp->iznosNarudzbe[i] = temp->kolicinaLijeka[i] * temp->cijenaLijeka[temp->menu2[i] - 1];
+                        cout << "Iznos koji morate platiti nakon izmjene je: " << temp->iznosNarudzbe[i] << " RM" << endl;
+                        system("PAUSE");
+                    }
+                    temp = temp->next;
+                    system("cls");
+                }
+                cout << "ZAPIS JE IZMJENJEN....!" << endl;
+            }
+            else
+            {
+                if (temp != NULL && temp->brojRacuna != sid)
+                {
+                    cout << "Nevažeći broj računa...!" << endl;
+                }
+            }
+        }
+    }
+
+    void order_list() // Metoda za ispisivanje liste narudžbi
+    {
+        int i, num, num2;
+        bool found;
+        system("cls");
+        node *temp;
+
+        temp = starting_point;
+        found = false;
+
+        cout << "Unesite broj računa za ispis računa: ";
+        cin >> num2;
+        cout << "\n";
+        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+        cout << "\t\t\tOvdje je lista narudžbi" << endl;
+        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+
+        if (temp == NULL)
+        {
+            cout << "\t\t\tNema narudžbi za prikazivanje\n";
+        }
+        while (temp != NULL && !found)
+        {
+            if (temp->brojRacuna == num2)
+            {
+                found = true;
+            }
+            else
+            {
+                temp = temp->next;
+            }
+        }
+        if (found)
+        {
+            cout << "Broj računa: " << temp->brojRacuna << endl;
+            cout << "\n";
+            cout << "Ime kupca: " << temp->imeKupca << endl;
+
+            cout << "Datum narudžbe: " << temp->datum << endl;
+
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "|  Vrsta lijeka    |     Ime lijeka     |    Količina    |   Ukupna cijena   |" << endl;
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            for (i = 0; i < temp->x; i++)
+            {
+                cout << "     " << temp->vrstaLijeka << "     " << "  \t\t";
+                cout << "  " << temp->imeLijeka[temp->menu2[i] - 1] << "\t\t\t  ";
+                cout << temp->kolicinaLijeka[i] << "\t\t";
+                cout << temp->iznosNarudzbe[i] << " KM" << endl;
+                cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            }
+
+            temp->ukupnoNarudzbe = temp->iznosNarudzbe[0] + temp->iznosNarudzbe[1] + temp->iznosNarudzbe[2] + temp->iznosNarudzbe[3] + temp->iznosNarudzbe[4] + temp->iznosNarudzbe[5] + temp->iznosNarudzbe[6] + temp->iznosNarudzbe[7] + temp->iznosNarudzbe[8] + temp->iznosNarudzbe[9];
+            cout << "Ukupan iznos računa: " << temp->ukupnoNarudzbe << " KM" << endl;
+            cout << "Unesite iznos koji trebate platiti: ";
+            cin >> num;
+
+            cout << "\n";
+            cout << "\n";
+            cout << "Plaćanje izvršeno\nZahvaljujemo\n";
+            cout << "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+        }
+    }
+
+    void summary() // Metoda za dnevni pregled ukupne prodaje
+    {
+        system("cls");
+        node *temp;
+        temp = starting_point;
+
+        if (temp == NULL)
+        {
+            cout << "\t\t\tNema narudžbi za prikazivanje\n";
+        }
+        else
+        {
+            cout << "\n";
+            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << " \t\tEvo dnevnog pregleda svih narudžbi \n"; // ispisuje sve račune
+
+            while (temp != NULL)
+            {
+
+                cout << "Broj računa: " << temp->brojRacuna;
                 cout << "\n";
                 cout << "Ime kupca: " << temp->imeKupca << endl;
 
                 cout << "Datum narudžbe: " << temp->datum << endl;
 
+                cout << "*****************************************************************************" << endl;
+
                 cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
-                cout << "|  Vrsta lijeka    |     Ime lijeka     |    Količina    |   Ukupna cijena   |" << endl;
+                cout << "|  Vrsta lijeka  |   Ime lijeka    |    Količina     |    Ukupna cijena |" << endl;
                 cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
-                for (i = 0; i < temp->x; i++)
+                for (int i = 0; i < temp->x; i++)
                 {
-                    cout << "     " << temp->vrstaLijeka << "     " << "  \t\t";
-                    cout << "  " << temp->imeLijeka[temp->menu2[i] - 1] << "\t\t\t  ";
+                    cout << temp->vrstaLijeka << "  \t\t";
+                    cout << temp->imeLijeka[temp->menu2[i] - 1] << "\t\t";
                     cout << temp->kolicinaLijeka[i] << "\t\t";
-                    cout << temp->iznosNarudzbe[i] << " KM" << endl;
-                    cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                    cout << temp->iznosNarudzbe[i] << " RM" << endl;
+                    cout << "*****************************************************************************" << endl;
                 }
 
                 temp->ukupnoNarudzbe = temp->iznosNarudzbe[0] + temp->iznosNarudzbe[1] + temp->iznosNarudzbe[2] + temp->iznosNarudzbe[3] + temp->iznosNarudzbe[4] + temp->iznosNarudzbe[5] + temp->iznosNarudzbe[6] + temp->iznosNarudzbe[7] + temp->iznosNarudzbe[8] + temp->iznosNarudzbe[9];
-                cout << "Ukupan iznos računa: " << temp->ukupnoNarudzbe << " KM" << endl;
-                cout << "Unesite iznos koji trebate platiti: ";
-                cin >> num;
+                cout << "Ukupni iznos računa: " << temp->ukupnoNarudzbe;
 
                 cout << "\n";
                 cout << "\n";
-                cout << "Plaćanje izvršeno\nZahvaljujemo\n";
-                cout << "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+                cout << "\n******************************************************************************\n";
+
+                temp = temp->next;
             }
         }
+    }
 
-        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
-        // Nije implementirana niti ima stvarnu funkcionalnost.
-        void summary() // Metoda za dnevni pregled ukupne prodaje
-        {
-            // Komentar: Ovde bi trebala biti implementacija generisanja rezimea.
-            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
-        }
+    void quit() // Metoda za izlaz iz programa
+    {
+        cout << "\nIzabrali ste izlazak.\n" << endl;
+    }
 
-        // Ova funkcija je ovde samo da bi omogućila uspešnu kompilaciju projekta.
-        // Nije implementirana niti ima stvarnu funkcionalnost.
-        void quit() // Metoda za izlaz iz programa
-        {
-            // Komentar: Ovde bi trebala biti implementacija zatvaranja programa.
-            // Međutim, trenutno ova funkcija samo postoji kako bi se projekat mogao kompajlirati.
-        }
     MedType(); // Konstruktor klase MedType
 };
 

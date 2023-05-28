@@ -367,12 +367,6 @@ MedType::MedType()
     // Implementacija konstruktora klase MedType
 }
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
-
 struct Pacijent {
     string ime;
     string prezime;
@@ -413,17 +407,6 @@ void prikaziPacijente(const vector<Pacijent>& pacijenti) {
         cout << "Broj osiguranja: " << pacijent.brojOsiguranja << endl;
         cout << "--------------------------" << endl;
     }
-}
-
-int main() {
-    vector<Pacijent> pacijenti;
-    
-    unosPacijenta(pacijenti);
-    unosPacijenta(pacijenti);
-    
-    prikaziPacijente(pacijenti);
-    
-    return 0;
 }
 
 int main() {

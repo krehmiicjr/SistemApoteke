@@ -159,3 +159,17 @@ Ako lista narudžbi (starting_point) jest prazna, prikazuje se poruka "Nema naru
 Metoda quit:
 Ova metoda ima zadatak prikazati poruku korisniku da je odabrao izlazak iz programa.
 Jednostavno se prikazuje poruka "Izabrali ste izlazak."
+
+>> Sedma promjena na originalnoj verziji koda:
+Struktura Radnik:
+U najnovijoj implementaciji dodana je struktura Radnik, koja predstavlja radnika u sistemu. Ova struktura ima dva atributa: imePrezime (tipa std::string) koji predstavlja ime i prezime radnika, i password (također tipa std::string) koji predstavlja lozinku radnika.
+
+Također je definisana i globalna promjenljiva radnici, koja je vektor objekata tipa Radnik. Ovaj vektor sadrži informacije o svim registrovanim radnicima u sistemu, uključujući njihovo ime i prezime i pripadajuću lozinku.
+
+U main funkciji, nakon što korisnik unese svoje ime i prezime, provjerava se da li uneseni radnik postoji u vektoru radnici. To se postiže prolaskom kroz sve elemente vektora i upoređivanjem atributa imePrezime svakog objekta sa unesenim imenom i prezimenom.
+
+Ako se uneseni radnik pronađe, korisniku se zatim traži unos lozinke. Unesena lozinka se provjerava sa pripadajućom lozinkom u vektoru radnici za odgovarajućeg radnika. Ako se lozinke poklapaju, postavljamo validanRadnik na true, što znači da je unos ispravan i da je radnik uspješno autentificiran.
+
+Ako unos nije validan, tj. radnik nije pronađen ili lozinka nije ispravna, ispisuje se odgovarajuća poruka i program se završava.
+
+Nakon provjere validnosti radnika, koristi se system("cls") naredba za čišćenje ekrana kako bi se uklonili prethodno uneseni podaci i prikazao svježi ekran. Zatim se ispisuje poruka dobrodošlice za radnika, koja uključuje ime i prezime radnika koje je upravo uneseno.

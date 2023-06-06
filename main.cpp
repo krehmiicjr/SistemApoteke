@@ -1,6 +1,7 @@
 #include <iostream> // Za unos i ispis podataka s konzole
 #include <stdlib.h> // Za korištenje funkcije system() za manipulaciju operativnim sistemom
 #include <string> // Za rad s nizovima znakova (stringovima)
+#include <vector> // Za rad s vektorima
 #include <cctype> // Za rad s karakterima (npr. provjera je li karakter slovo)
 #include <cmath> // Za matematičke funkcije poput sqrt(), sin(), cos(), itd.
 #include <cstdio> // Za ulazno-izlazne operacije
@@ -34,6 +35,19 @@ struct node
 node *starting_point = NULL; // Pokazivač na početni čvor
 node *head_point = NULL; // Pokazivač na glavni čvor
 node *lasting_point = NULL; // Pokazivač na zadnji čvor
+
+// Struktura koja predstavlja radnika
+struct Radnik {
+    std::string imePrezime;
+    std::string password;
+};
+
+// Lista svih radnika
+std::vector<Radnik> radnici = {
+        {"Ensar Krehmić" "Ensar Krehmic" "ensar krehmić" "ensar krehmic", "password1"},
+        {"Nadina Muračević" "Nadina Muracevic" "nadina muračević" "nadina muracevic", "password2"},
+        {"Besim Škorić" "Besim Skoric" "besim škorić" "besim skoric", "password3"}
+};
 
 class MedType {
 public:
@@ -372,8 +386,39 @@ int main() {
     MedType medicine; // Kreiranje objekta klase MedType
     int menu;
 
+    string imePrezime;
+    string password;
+
+    cout << "Dobrodošli! Unesite vaše ime i prezime: ";
+    getline(cin, imePrezime);
+
+    bool validanRadnik = false;
+    for (const Radnik& radnik : radnici) {
+        if (radnik.imePrezime == imePrezime) {
+            cout << "Unesite lozinku: ";
+            cin >> password;
+            cin.ignore();
+
+            if (radnik.password == password) {
+                validanRadnik = true;
+                break;
+            }
+        }
+    }
+
+    if (!validanRadnik) {
+        cout << "Neispravno ime/prezime ili lozinka. Izlazak iz programa." << endl;
+        return 0;
+    }
+
+    // Očisti ekran
+    system("cls");
+
     do {
         system("cls"); // Čisti ekran konzole
+        // Ispisivanje poruke dobrodošlice za radnika
+        cout << "Dobrodošli, " << imePrezime << "! Sretan rad! \n\n" << endl;
+
         cout << "\t\t\t    Sistem za vođenje apoteke \n"; // Ispisuje naziv programa
         cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n"; // Ispisuje liniju razdjeljivača
         cout << "\t\t\t1. Unesi novu narudžbu lijeka \t\t\n"; // Ispisuje opciju za unos nove narudžbe

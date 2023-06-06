@@ -384,20 +384,20 @@ MedType::MedType()
 
 void unosPacijenta(vector<node>& pacijenti) {
     node noviPacijent;
-    
+
     cout << "Unesite ime pacijenta: ";
     getline(cin, noviPacijent.imeKupca);
-    
+
     cout << "Unesite datum rodjenja pacijenta: ";
     getline(cin, noviPacijent.datum);
-	
+
     cout << "Unesite broj racuna pacijenta: ";
     cin>>noviPacijent.brojRacuna;
     cin.ignore();
-    
-    
+
+
     pacijenti.push_back(noviPacijent);
-    
+
     cout << "Pacijent uspjesno dodat." << endl;
 }
 
@@ -506,7 +506,7 @@ int main() {
 
             default: {
                 // Ako je unesen neispravan izbor, ispisuje se poruka o neispravnom unosu
-                cout << "Unijeli ste nevažeći unos\\nPonovno unesite izbor\\n" << endl;
+                cout << "Unijeli ste nevažeći unos\\nPonovo unesite izbor\\n" << endl;
                 break;
             }
         }

@@ -7,7 +7,7 @@
 #include <cstdio> // Za ulazno-izlazne operacije
 #include <fstream> // Za rad s datotekama (ulazno-izlazne operacije s datotekama)
 #include <iomanip> // Za formatiranje ispisa
-
+#include <vector>
 #define MAX 10 // Definicija maksimalnog broja elemenata u nizu
 
 using namespace std;
@@ -380,6 +380,36 @@ MedType::MedType()
 {
     // Implementacija konstruktora klase MedType
 }
+
+
+void unosPacijenta(vector<node>& pacijenti) {
+    node noviPacijent;
+    
+    cout << "Unesite ime pacijenta: ";
+    getline(cin, noviPacijent.imeKupca);
+    
+    cout << "Unesite datum rodjenja pacijenta: ";
+    getline(cin, noviPacijent.datum);
+	
+    cout << "Unesite broj racuna pacijenta: ";
+    cin>>noviPacijent.brojRacuna;
+    cin.ignore();
+    
+    
+    pacijenti.push_back(noviPacijent);
+    
+    cout << "Pacijent uspjesno dodat." << endl;
+}
+
+void prikaziPacijente(const vector<node>& pacijenti) {
+    for (const node& pacijent : pacijenti) {
+        cout << "Ime: " << pacijent.imeKupca << endl;
+        cout << "Datum rodjenja: " << pacijent.datum<< endl;
+        cout << "Broj racuna: " << pacijent.brojRacuna << endl;
+        cout << "--------------------------" << endl;
+    }
+}
+
 
 int main() {
     system("COLOR 0F"); // Postavlja boju konzole (u ovom slučaju crna pozadina i bijeli tekst)

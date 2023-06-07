@@ -44,10 +44,76 @@ struct Radnik {
 
 // Lista svih radnika
 std::vector<Radnik> radnici = {
-        {"Ensar Krehmić" "Ensar Krehmic" "ensar krehmić" "ensar krehmic", "password1"},
-        {"Nadina Muračević" "Nadina Muracevic" "nadina muračević" "nadina muracevic", "password2"},
-        {"Besim Škorić" "Besim Skoric" "besim škorić" "besim skoric", "password3"}
+        {"Ensar Krehmić", "password1"},
+        {"Nadina Muračević", "password2"},
+        {"Besim Škorić", "password3"}
 };
+
+void unosPacijenta(vector<node>& pacijenti) {
+    system("cls"); // Briše sadržaj konzole
+    node noviPacijent;
+
+    cout << "Unesite ime pacijenta:";
+    getline(cin, noviPacijent.imeKupca);
+
+    cout << "Unesite datum rodjenja pacijenta:";
+    getline(cin, noviPacijent.datum);
+
+    cout << "Unesite broj računa pacijenta:";
+    cin >> noviPacijent.brojRacuna;
+    cin.ignore();
+
+    pacijenti.push_back(noviPacijent);
+
+    cout << "Pacijent uspješno dodat." << endl;
+}
+
+void prikaziSvePacijente(const vector<node>& pacijenti) {
+    system("cls"); // Briše sadržaj konzole
+    if (pacijenti.empty()) {
+        cout << "Nema dostupnih pacijenata." << endl;
+        return;
+    }
+
+    cout << "Svi pacijenti:" << endl;
+    for (const node& pacijent : pacijenti) {
+        cout << "Ime: " << pacijent.imeKupca << endl;
+        cout << "--------------------------" << endl;
+    }
+}
+
+void prikaziPacijente(const vector<node>& pacijenti) {
+    system("cls"); // Briše sadržaj konzole
+    if (pacijenti.empty()) {
+        cout << "Nema dostupnih pacijenata." << endl;
+        return;
+    }
+
+    cout << "Dostupni pacijenti:" << endl;
+    for (int i = 0; i < pacijenti.size(); i++) {
+        const node& pacijent = pacijenti[i];
+        cout << "Indeks: " << i << endl;
+        cout << "Ime: " << pacijent.imeKupca << endl;
+        cout << "--------------------------" << endl;
+    }
+
+    int indeks;
+    cout << "Unesite indeks pacijenta:";
+    cin >> indeks;
+    cin.ignore();
+
+    if (indeks >= 0 && indeks < pacijenti.size()) {
+        const node& pacijent = pacijenti[indeks];
+        cout << "Informacije o pacijentu:" << endl;
+        cout << "Ime: " << pacijent.imeKupca << endl;
+        cout << "Datum rodjenja:" << pacijent.datum << endl;
+        cout << "Broj računa:" << pacijent.brojRacuna << endl;
+        // Dodajte dodatne informacije o pacijentu ovisno o potrebama
+    }
+    else {
+        cout << "Neispravan indeks pacijenta." << endl;
+    }
+}
 
 class MedType {
 public:
@@ -62,10 +128,10 @@ public:
         node *temp;
         temp = new node;
 
-        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+        cout << "-----------------------------------------------------------------------------\n";
         cout << "ID LIJEKA" << "\tVRSTA LIJEKA" << "\t\tIME LIJEKA" << "           CIJENA LIJEKA(KM)"
              << endl; // Ispis zaglavlja tablice
-        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+        cout << "-----------------------------------------------------------------------------\n";
         cout << "0001" << "\t" << "\tOTC" << "\t\t" << "    Lijek1" << "			1.50 KM" << endl; // Lijek1
         cout << "0002" << "\t" << "\tOTC" << "\t\t" << "    Lijek2" << "			2.20 KM" << endl; // Lijek2
         cout << "0003" << "\t" << "\tOTC" << "\t\t" << "    Lijek3" << "			3.00 KM" << endl; // Lijek3
@@ -95,24 +161,24 @@ public:
         } else {
             for (i = 0; i < temp->x; i++) {
 
-                cout << "Unesite svoj odabir: "; // Unos odabira lijeka
+                cout << "Unesite svoj odabir:"; // Unos odabira lijeka
                 cin >> temp->menu2[i];
 
                 cout << "Ime lijeka: " << temp->imeLijeka[temp->menu2[i] - 1] << endl;  // Ispis imena odabranog lijeka
-                cout << "Koliko lijekova želite: ";
+                cout << "Koliko lijekova želite:";
                 cin >> temp->kolicinaLijeka[i];  // Unos količine lijeka
                 temp->iznosNarudzbe[i] =
                         temp->kolicinaLijeka[i] * temp->cijenaLijeka[temp->menu2[i] - 1];  // Izračunaj ukupan iznos
-                cout << "Iznos koji trebate platiti: " << temp->iznosNarudzbe[i] << " KM"
+                cout << "Iznos koji trebate platiti:" << temp->iznosNarudzbe[i] << " KM"
                      << endl;  // Ispis ukupnog iznosa
                 system("PAUSE");
 
             }
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "-----------------------------------------------------------------------------" << endl;
             cout << "Narudžba uspješno zabilježena" << endl;
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "-----------------------------------------------------------------------------" << endl;
             cout << "Idite na izbornik računa za plaćanje računa" << endl;
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "-----------------------------------------------------------------------------" << endl;
             system("PAUSE");
 
             temp->next = NULL;
@@ -266,9 +332,9 @@ public:
         cout << "Unesite broj računa za ispis računa: ";
         cin >> num2;
         cout << "\n";
-        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+        cout << "-----------------------------------------------------------------------------" << endl;
         cout << "\t\t\tOvdje je lista narudžbi" << endl;
-        cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+        cout << "-----------------------------------------------------------------------------" << endl;
 
         if (temp == NULL)
         {
@@ -293,16 +359,16 @@ public:
 
             cout << "Datum narudžbe: " << temp->datum << endl;
 
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "-----------------------------------------------------------------------------" << endl;
             cout << "|  Vrsta lijeka    |     Ime lijeka     |    Količina    |   Ukupna cijena   |" << endl;
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+            cout << "-----------------------------------------------------------------------------" << endl;
             for (i = 0; i < temp->x; i++)
             {
                 cout << "     " << temp->vrstaLijeka << "     " << "  \t\t";
                 cout << "  " << temp->imeLijeka[temp->menu2[i] - 1] << "\t\t\t  ";
                 cout << temp->kolicinaLijeka[i] << "\t\t";
                 cout << temp->iznosNarudzbe[i] << " KM" << endl;
-                cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                cout << "-----------------------------------------------------------------------------" << endl;
             }
 
             temp->ukupnoNarudzbe = temp->iznosNarudzbe[0] + temp->iznosNarudzbe[1] + temp->iznosNarudzbe[2] + temp->iznosNarudzbe[3] + temp->iznosNarudzbe[4] + temp->iznosNarudzbe[5] + temp->iznosNarudzbe[6] + temp->iznosNarudzbe[7] + temp->iznosNarudzbe[8] + temp->iznosNarudzbe[9];
@@ -313,7 +379,7 @@ public:
             cout << "\n";
             cout << "\n";
             cout << "Plaćanje izvršeno\nZahvaljujemo\n";
-            cout << "\n|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n";
+            cout << "\n-----------------------------------------------------------------------------\n";
         }
     }
 
@@ -330,21 +396,21 @@ public:
         else
         {
             cout << "\n";
-            cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
-            cout << " \t\tEvo dnevnog pregleda svih narudžbi \n"; // ispisuje sve račune
+            cout << "-----------------------------------------------------------------------------\n" << endl;
+            cout << " \tEvo dnevnog pregleda svih narudžbi \n"; // ispisuje sve račune
 
             while (temp != NULL)
             {
 
-                cout << "Broj računa: " << temp->brojRacuna;
+                cout << "Broj računa:" << temp->brojRacuna;
                 cout << "\n";
-                cout << "Ime kupca: " << temp->imeKupca << endl;
-
-                cout << "Datum narudžbe: " << temp->datum << endl;
+                cout << "Ime kupca:" << temp->imeKupca << endl;
+                cout << "\n";
+                cout << "Datum narudžbe:" << temp->datum << endl;
 
                 cout << "*****************************************************************************" << endl;
 
-                cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
+                cout << "-----------------------------------------------------------------------------" << endl;
                 cout << "|  Vrsta lijeka  |   Ime lijeka    |    Količina     |    Ukupna cijena |" << endl;
                 cout << "|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||" << endl;
                 for (int i = 0; i < temp->x; i++)
@@ -357,7 +423,7 @@ public:
                 }
 
                 temp->ukupnoNarudzbe = temp->iznosNarudzbe[0] + temp->iznosNarudzbe[1] + temp->iznosNarudzbe[2] + temp->iznosNarudzbe[3] + temp->iznosNarudzbe[4] + temp->iznosNarudzbe[5] + temp->iznosNarudzbe[6] + temp->iznosNarudzbe[7] + temp->iznosNarudzbe[8] + temp->iznosNarudzbe[9];
-                cout << "Ukupni iznos računa: " << temp->ukupnoNarudzbe;
+                cout << "Ukupni iznos računa:" << temp->ukupnoNarudzbe;
 
                 cout << "\n";
                 cout << "\n";
@@ -373,6 +439,23 @@ public:
         cout << "\nIzabrali ste izlazak.\n" << endl;
     }
 
+    void odjava_radnika()
+    {
+        cout << "Da li ste sigurni da se želite odjaviti? (da/ne):";
+        string odjavaOdgovor;
+        cin >> odjavaOdgovor;
+        cin.ignore();
+
+        if (odjavaOdgovor == "da") {
+            cout << "Radnik je odjavljen." << endl;
+            throw runtime_error("ODJAVA");  // Bacanje izuzetka za povratak na početak programa
+        }
+        else {
+            cout << "Nastavak rada." << endl;
+            return;  // Nastavak izvršavanja programa
+        }
+    }
+
     MedType(); // Konstruktor klase MedType
 };
 
@@ -381,51 +464,22 @@ MedType::MedType()
     // Implementacija konstruktora klase MedType
 }
 
-
-void unosPacijenta(vector<node>& pacijenti) {
-    node noviPacijent;
-
-    cout << "Unesite ime pacijenta: ";
-    getline(cin, noviPacijent.imeKupca);
-
-    cout << "Unesite datum rodjenja pacijenta: ";
-    getline(cin, noviPacijent.datum);
-
-    cout << "Unesite broj racuna pacijenta: ";
-    cin>>noviPacijent.brojRacuna;
-    cin.ignore();
-
-
-    pacijenti.push_back(noviPacijent);
-
-    cout << "Pacijent uspjesno dodat." << endl;
-}
-
-void prikaziPacijente(const vector<node>& pacijenti) {
-    for (const node& pacijent : pacijenti) {
-        cout << "Ime: " << pacijent.imeKupca << endl;
-        cout << "Datum rodjenja: " << pacijent.datum<< endl;
-        cout << "Broj racuna: " << pacijent.brojRacuna << endl;
-        cout << "--------------------------" << endl;
-    }
-}
-
-
 int main() {
     system("COLOR 0F"); // Postavlja boju konzole (u ovom slučaju crna pozadina i bijeli tekst)
     MedType medicine; // Kreiranje objekta klase MedType
+    MedType medType; // Kreiranje objekta klase medType
     int menu;
 
     string imePrezime;
     string password;
 
-    cout << "Dobrodošli! Unesite vaše ime i prezime: ";
+    cout << "\nDobrodošli! Unesite vaše ime i prezime:";
     getline(cin, imePrezime);
 
     bool validanRadnik = false;
     for (const Radnik& radnik : radnici) {
         if (radnik.imePrezime == imePrezime) {
-            cout << "Unesite lozinku: ";
+            cout << "Unesite lozinku:";
             cin >> password;
             cin.ignore();
 
@@ -444,77 +498,72 @@ int main() {
     // Očisti ekran
     system("cls");
 
-    do {
-        system("cls"); // Čisti ekran konzole
-        // Ispisivanje poruke dobrodošlice za radnika
-        cout << "Dobrodošli, " << imePrezime << "! Sretan rad! \n\n" << endl;
+    // Ispisivanje poruke dobrodošlice za radnika
+    cout << "Dobrodošli, " << imePrezime << "! Sretan rad!" << endl;
 
-        cout << "\t\t\t    Sistem za vođenje apoteke \n"; // Ispisuje naziv programa
-        cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n"; // Ispisuje liniju razdjeljivača
-        cout << "\t\t\t1. Unesi novu narudžbu lijeka \t\t\n"; // Ispisuje opciju za unos nove narudžbe
-        cout << "\t\t\t2. Obriši posljednju narudžbu lijeka\t\t\n"; // Ispisuje opciju za brisanje posljednje narudžbe
-        cout << "\t\t\t3. Izmijeni listu narudžbi \t\t\t\n"; // Ispisuje opciju za izmjenu liste narudžbi
-        cout << "\t\t\t4. Ispiši račun i izvrši plaćanje \t\n"; // Ispisuje opciju za ispis računa i izvršavanje plaćanja
-        cout << "\t\t\t5. Dnevni pregled ukupne prodaje \t\t \n"; // Ispisuje opciju za dnevni pregled ukupne prodaje
-        cout << "\t\t\t6. Izlaz\t\t\t\t\t\n"; // Ispisuje opciju za izlaz iz programa
-        cout << "\t\t||||||||||||||||||||||||||||||||||||||||||||||||||||\n"; // Ispisuje liniju razdjeljivača
-        cout << "Unesi izbor: "; // Traži unos korisnikovog izbora
+    if (validanRadnik) {
+        std::vector<node> pacijenti;
+        int izbor;
 
-        cin >> menu; // Unos korisnikovog izbora
+        bool odjava = false;
+        while (!odjava) {
+            cout << "\nSISTEM ZA VOĐENJE APOTEKE" << endl;
+            cout << "-----------------------------------------------------------------------------------" << endl;
+            cout << "Izaberite opciju:" << endl;
+            cout << "\n\t1. Unesi novu narudžbu lijeka" << endl;
+            cout << "\t2. Obriši posljednju narudžbu lijeka" << endl;
+            cout << "\t3. Izmijeni listu narudžbi" << endl;
+            cout << "\t4. Ispisi račun i izvrši plaćanje" << endl;
+            cout << "\t5. Dnevni pregled ukupne prodaje" << endl;
+            cout << "\t6. Unesi pacijenta" << endl;
+            cout << "\t7. Prikaži sve pacijente" << endl;
+            cout << "\t8. Prikaži pojedinačnog pacijenta" << endl;
+            cout << "\t9. Izlaz" << endl;
+            cout << "\t10. Odjava\n" << endl;
+            cout << "Unesite broj opcije:";
+            cin >> izbor;
+            cin.ignore();
 
-        switch (menu) {
-            case 1: {
-                // Ako je izabrana opcija 1, poziva se metoda za unos nove narudžbe lijeka
-                medicine.order();
-                break;
-            }
-
-            case 2: {
-                // Ako je izabrana opcija 2, poziva se metoda za brisanje posljednje narudžbe lijeka
-                medicine.delete_item();
-                system("PAUSE");
-                break;
-            }
-
-            case 3: {
-                // Ako je izabrana opcija 3, poziva se metoda za izmjenu liste narudžbi
-                medicine.update_order();
-                system("PAUSE");
-                break;
-            }
-
-            case 4: {
-                // Ako je izabrana opcija 4, poziva se metoda za ispisivanje liste narudžbi
-                medicine.order_list();
-                system("PAUSE");
-                break;
-            }
-
-            case 5: {
-                // Ako je izabrana opcija 5, poziva se metoda za dnevni pregled ukupne prodaje
-                medicine.summary();
-                system("PAUSE");
-                break;
-            }
-
-            case 6: {
-                // Ako je izabrana opcija 6, poziva se metoda za izlaz iz programa i prekida se petlja
-                medicine.quit();
-                goto a;
-                break;
-            }
-
-            default: {
-                // Ako je unesen neispravan izbor, ispisuje se poruka o neispravnom unosu
-                cout << "Unijeli ste nevažeći unos\\nPonovo unesite izbor\\n" << endl;
-                break;
+            switch (izbor) {
+                case 1:
+                    // Unos nove narudžbe lijeka
+                    break;
+                case 2:
+                    // Brisanje posljednje narudžbe lijeka
+                    break;
+                case 3:
+                    // Izmjena liste narudžbi
+                    break;
+                case 4:
+                    // Ispis računa i izvršenje plaćanja
+                    break;
+                case 5:
+                    // Dnevni pregled ukupne prodaje
+                    break;
+                case 6:
+                    unosPacijenta(pacijenti);
+                    break;
+                case 7:
+                    prikaziSvePacijente(pacijenti);
+                    break;
+                case 8:
+                    prikaziPacijente(pacijenti);
+                    break;
+                case 9:
+                    cout << "Hvala na korištenju programa. Izlazak iz programa." << endl;
+                    return 0;
+                case 10:
+                    medType.odjava_radnika();
+                    odjava = true;
+                    system("clear");
+                    break;
+                default:
+                    cout << "Neispravan izbor. Molimo unesite ponovo." << endl;
+                    break;
             }
         }
+    }
 
-    } while (menu != 6); // Petlja se ponavlja sve dok korisnik ne odabere izlaz (6)
-
-    a:
-    cout << "Zahvaljujemo!" << endl;
     system("PAUSE");
     return 0;
 }

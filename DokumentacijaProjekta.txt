@@ -173,3 +173,36 @@ Ako se uneseni radnik pronađe, korisniku se zatim traži unos lozinke. Unesena 
 Ako unos nije validan, tj. radnik nije pronađen ili lozinka nije ispravna, ispisuje se odgovarajuća poruka i program se završava.
 
 Nakon provjere validnosti radnika, koristi se system("cls") naredba za čišćenje ekrana kako bi se uklonili prethodno uneseni podaci i prikazao svježi ekran. Zatim se ispisuje poruka dobrodošlice za radnika, koja uključuje ime i prezime radnika koje je upravo uneseno.
+
+>> Kasno je pa se preskočila 'osma' promjena...
+
+>> Deveta promjena na originalnoj verziji koda:
+Unos pacijenta:
+Implementirana je funkcija unosPacijenta koja omogućava unos novog pacijenta u sistem apoteke.
+Korisniku se prikazuju pitanja za unos imena pacijenta, datuma rođenja i broja računa.
+Uneseni podaci se dodaju u vektor pacijenti koji čuva informacije o svim pacijentima.
+
+Prikaz svih pacijenata:
+Dodana je funkcija prikaziSvePacijente koja prikazuje sve pacijente koji se nalaze u vektoru pacijenti.
+Ako nema dostupnih pacijenata, ispisuje se odgovarajuća poruka.
+Odjava radnika:
+
+Prikaz pojedinačnog pacijenta:
+Dodana je funkcija prikaziPacijenta koja omogućava prikaz pojedinačnih informacija o pacijentu na temelju unesenog indeksa.
+Korisniku se prikazuje poruka za unos indeksa pacijenta.
+Nakon unosa indeksa, provjerava se da li je indeks ispravan (unutar granica vektora pacijenti).
+Ako je indeks ispravan, prikazuju se informacije o pacijentu s tim indeksom, kao što su ime, datum rođenja i broj računa.
+Ako je indeks neispravan, ispisuje se poruka o neispravnom indeksu pacijenta.
+
+Implementirana je funkcija odjava_radnika koja provjerava da li radnik želi izvršiti odjavu.
+Nakon prikaza pitanja "Da li ste sigurni da se želite odjaviti?", radnik unosi odgovor.
+Ako je odgovor potvrdan, ispisuje se poruka o odjavi radnika, a program se vraća na početak int main funkcije, gdje će biti zatražena nova prijava radnika. (ovo sam pokušao implementirati, ali nisam uspio tako da sam samo napravio da se program ugasi nakon odjave)
+Ako je odgovor negativan, program nastavlja s izvršavanjem.
+
+Estetska poboljšanja:
+Iskorištena je biblioteka <cstdlib> kako bi se mogla koristiti funkcija system("clear") koja briše sadržaj konzole.
+Nakon odjave radnika, koristi se system("clear") kako bi se očistio sadržaj konzole prije prikaza početnog izbornika.
+Izbornik opcija je estetski poboljšan s dodatnim zaglavljem i razdjelnicima kako bi bio pregledniji i privlačniji.
+
+-------------------------------------------------------------------------
+Ovo bi ujedno trebala biti i posljednja promjena na originalnoj verziji koda, odnosno kod koji je commitan na GitHub repository 07.06.2023 negdje oko pola 3 ujutru bi trebao biti i završni kod odnosno završna verzija kod za Sistem vođenja apoteke.

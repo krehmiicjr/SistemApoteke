@@ -7,14 +7,12 @@
 #include <cstdio> // Za ulazno-izlazne operacije
 #include <fstream> // Za rad s datotekama (ulazno-izlazne operacije s datotekama)
 #include <iomanip> // Za formatiranje ispisa
-#include <vector>
 #define MAX 10 // Definicija maksimalnog broja elemenata u nizu
 
 using namespace std;
 
 // Definicija strukture 'node' za čuvanje podataka o narudžbi lijeka
-struct node
-{
+struct node {
     int brojRacuna; // Broj računa
     string imeKupca; // Ime kupca
     string datum; // Datum narudžbe
@@ -26,35 +24,35 @@ struct node
     double cijenaLijeka[MAX] = { 1.50, 2.20, 3.00, 2.80, 1.90, 4.50, 3.70, 2.40, 1.80, 3.20 }; // Cijene lijekova
     double ukupnoNarudzbe; // Ukupan iznos narudžbe
 
-    node *prev; // Pokazivač na prethodni čvor
     node *next; // Pokazivač na sljedeći čvor
-    node *link; // Dodatni pokazivač
-
-}*q, *temp;
+} *temp;
 
 node *starting_point = NULL; // Pokazivač na početni čvor
-node *head_point = NULL; // Pokazivač na glavni čvor
 node *lasting_point = NULL; // Pokazivač na zadnji čvor
 
 // Struktura koja predstavlja radnika
 struct Radnik {
-    std::string imePrezime;
-    std::string password;
+    string imePrezime;
+    string password;
 };
 
 // Lista svih radnika
-std::vector<Radnik> radnici = {
+vector<Radnik> radnici = {
+        {"Narcisa Hadžajlić", "password0"},
         {"Ensar Krehmić", "password1"},
         {"Nadina Muračević", "password2"},
-        {"Besim Škorić", "password3"}
+        {"Besim Škorić", "password3"},
 };
+
+const string FILENAME = "pacijenti.txt";
 
 void unosPacijenta(vector<node>& pacijenti) {
     system("cls"); // Briše sadržaj konzole
     node noviPacijent;
 
     cout << "Unesite ime pacijenta:";
-    getline(cin, noviPacijent.imeKupca);
+    cin >> noviPacijent.imeKupca;
+    cin.ignore();
 
     cout << "Unesite datum rodjenja pacijenta:";
     getline(cin, noviPacijent.datum);
@@ -65,7 +63,16 @@ void unosPacijenta(vector<node>& pacijenti) {
 
     pacijenti.push_back(noviPacijent);
 
-    cout << "Pacijent uspješno dodat." << endl;
+    // Spremanje podataka u datoteku
+    ofstream outputFile(FILENAME, ios::app); // Otvori datoteku u modu za dodavanje
+    if (outputFile.is_open()) {
+        outputFile << noviPacijent.imeKupca << "," << noviPacijent.datum << "," << noviPacijent.brojRacuna << endl;
+        outputFile.close();
+        cout << "Pacijent uspješno dodat." << endl;
+    }
+    else {
+        cout << "Nije moguće otvoriti datoteku za pisanje." << endl;
+    }
 }
 
 void prikaziSvePacijente(const vector<node>& pacijenti) {
@@ -147,8 +154,9 @@ public:
         temp = new node;
         cout << "Unesite broj narudžbe: ";
         cin >> temp->brojRacuna;
-        cout << "Unesite ime kupca: ";
-        cin >> temp->imeKupca;
+        cout << "Unesite ime i prezime kupca: ";
+        cin.ignore();
+        getline(cin, temp->imeKupca);
         cout << "Unesite datum: ";
         cin >> temp->datum;
         cout << "Koliko lijekova želite naručiti:" << endl;
@@ -279,7 +287,8 @@ public:
                 cout << "Promijeni broj računa: ";
                 cin >> temp->brojRacuna;
                 cout << "Promijeni ime kupca: ";
-                cin >> temp->imeKupca;
+                cin.ignore();
+                getline(cin, temp->imeKupca);
                 cout << "Promijeni datum: ";
                 cin >> temp->datum;
                 cout << "Koliko novih lijekova želite promijeniti:" << endl;
@@ -465,8 +474,24 @@ MedType::MedType()
 }
 
 int main() {
+    vector<node> pacijenti;
+    // Učitavanje podataka iz datoteke prilikom pokretanja programa
+    ifstream inputFile(FILENAME);
+    if (inputFile.is_open()) {
+        string line;
+        while (getline(inputFile, line)) {
+            node pacijent;
+            size_t delimiterPos1 = line.find(",");
+            size_t delimiterPos2 = line.find(",", delimiterPos1 + 1);
+            pacijent.imeKupca = line.substr(0, delimiterPos1);
+            pacijent.datum = line.substr(delimiterPos1 + 1, delimiterPos2 - delimiterPos1 - 1);
+            pacijent.brojRacuna = std::stoi(line.substr(delimiterPos2 + 1)); // Pretvorba u int
+            pacijenti.push_back(pacijent);
+        }
+        inputFile.close();
+    }
+
     system("COLOR 0F"); // Postavlja boju konzole (u ovom slučaju crna pozadina i bijeli tekst)
-    MedType medicine; // Kreiranje objekta klase MedType
     MedType medType; // Kreiranje objekta klase medType
     int menu;
 
@@ -480,7 +505,7 @@ int main() {
     for (const Radnik& radnik : radnici) {
         if (radnik.imePrezime == imePrezime) {
             cout << "Unesite lozinku:";
-            cin >> password;
+            getline(cin, password);
             cin.ignore();
 
             if (radnik.password == password) {
@@ -502,7 +527,7 @@ int main() {
     cout << "Dobrodošli, " << imePrezime << "! Sretan rad!" << endl;
 
     if (validanRadnik) {
-        std::vector<node> pacijenti;
+        vector<node> pacijenti;
         int izbor;
 
         bool odjava = false;
@@ -526,42 +551,75 @@ int main() {
 
             switch (izbor) {
                 case 1:
-                    // Unos nove narudžbe lijeka
+                    // Ako je izabrana opcija 1, poziva se metoda za unos nove narudžbe lijeka
+                    medType.order();
                     break;
+
                 case 2:
-                    // Brisanje posljednje narudžbe lijeka
+                    // Ako je izabrana opcija 2, poziva se metoda za brisanje posljednje narudžbe lijeka
+                    medType.delete_item();
                     break;
+
                 case 3:
-                    // Izmjena liste narudžbi
+                    // Ako je izabrana opcija 3, poziva se metoda za izmjenu liste narudžbi
+                    medType.update_order();
                     break;
+
                 case 4:
-                    // Ispis računa i izvršenje plaćanja
+                    // Ako je izabrana opcija 4, poziva se metoda za ispisivanje liste narudžbi
+                    medType.order_list();
                     break;
+
                 case 5:
-                    // Dnevni pregled ukupne prodaje
+                    // Ako je izabrana opcija 5, poziva se metoda za dnevni pregled ukupne prodaje
+                    medType.summary();
                     break;
+
                 case 6:
+                    // Ako je izabrana opcija 6, poziva se metoda za unos pacijenta
                     unosPacijenta(pacijenti);
                     break;
+
                 case 7:
+                    // Ako je izabrana opcija 7, poziva se metoda za prikaz svih unesenih pacijenata
                     prikaziSvePacijente(pacijenti);
                     break;
+
                 case 8:
+                    // Ako je izabrana opcija 8, poziva se metoda za dšrikaz pojedinačnih pacijenata
                     prikaziPacijente(pacijenti);
                     break;
+
                 case 9:
+                    // Ako je izabrana opcija 9, poziva se metoda za izlazak iz programa
+                    medType.quit();
                     cout << "Hvala na korištenju programa. Izlazak iz programa." << endl;
                     return 0;
+                    break;
+
                 case 10:
+                    // Ako je izabrana opcija 10, poziva se metoda za odjavu radnika
                     medType.odjava_radnika();
                     odjava = true;
-                    system("clear");
                     break;
+
                 default:
                     cout << "Neispravan izbor. Molimo unesite ponovo." << endl;
                     break;
             }
         }
+    }
+
+    // Spremanje podataka u datoteku prilikom završetka programa
+    ofstream outputFile(FILENAME);
+    if (outputFile.is_open()) {
+        for (const node& pacijent : pacijenti) {
+            outputFile << pacijent.imeKupca << "," << pacijent.datum << "," << pacijent.brojRacuna << endl;
+        }
+        outputFile.close();
+    }
+    else {
+        cout << "Nije moguće otvoriti datoteku za pisanje." << endl;
     }
 
     system("PAUSE");

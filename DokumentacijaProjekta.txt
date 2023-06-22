@@ -203,6 +203,28 @@ Estetska poboljšanja:
 Iskorištena je biblioteka <cstdlib> kako bi se mogla koristiti funkcija system("clear") koja briše sadržaj konzole.
 Nakon odjave radnika, koristi se system("clear") kako bi se očistio sadržaj konzole prije prikaza početnog izbornika.
 Izbornik opcija je estetski poboljšan s dodatnim zaglavljem i razdjelnicima kako bi bio pregledniji i privlačniji.
-
 -------------------------------------------------------------------------
-Ovo bi ujedno trebala biti i posljednja promjena na originalnoj verziji koda, odnosno kod koji je commitan na GitHub repository 07.06.2023 negdje oko pola 3 ujutru bi trebao biti i završni kod odnosno završna verzija kod za Sistem vođenja apoteke.
+>> Završna verzija koda za 'Sistem apoteke' 
+U posljednjoj izmjeni verzije koda za sistem apoteke, dodali smo ono osnovno, najbitnije ili jednu od onih stvari koje su bile obavezne pri izradi samog projekta, a to je upotreba datoteka.
+
+Datoteke smo iskoristili kako bi imali što efikasniju bazu podataka pacijenata smiještajući sve unesene pacijente u .txt fajl pod nazivom 'pacijenti.txt'. Naravno, pored samog unosa tih pacijenata unutar datoteke 'pacijenti.txt', istu tu datoteku smo čitali svaki put pri pokretanju samog programa kako bi učitavali iznova i iznova sve unesene pacijente do tad.
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Na kraju, definitivno možemo zaključiti da je projekat uspješno završen, čak i sa dodatnim funkcionalnostima koje nisu bile prvobitno tražene.
+U nastavku su navedene stvari koje su implementirane unutar projekta:
+
+Implementiran je sistem za unos pacijenata i njihovih podataka, uključujući ime, datum rođenja i broj računa. Podaci pacijenata se također pohranjuju u datoteku "pacijenti.txt" radi trajnog čuvanja.
+
+Implementirane su funkcije za prikaz svih pacijenata i pojedinačnih pacijenata na osnovu unesenog indeksa. Prikazuje se ime, datum rođenja i broj računa pacijenta.
+
+Napravljena je struktura podataka "node" koja sadrži podatke o narudžbi lijeka, uključujući broj računa, ime kupca, datum narudžbe, količinu lijeka, vrstu lijeka, iznos narudžbe i informacije o lijekovima.
+
+Implementirana je mogućnost unosa nove narudžbe lijeka. Korisnik bira željeni lijek i unosi količinu, a zatim se izračunava ukupan iznos narudžbe.
+
+Dodana je mogućnost brisanja posljednje narudžbe lijeka. Korisnik unosi broj narudžbe koju želi izbrisati, a zatim se ta narudžba uklanja iz liste narudžbi.
+
+Dodane su dodatne informacije o radnicima, uključujući njihova imena i lozinke. Radnici su implementirani kao objekti klase "Radnik" i čuvaju se u vektoru "radnici".
+
+Implementirane su dodatne biblioteke kao što su <string>, <vector>, <fstream>, <iomanip>, <cstdio>, <cmath>, <cctype> i <stdlib.h>. Ove biblioteke omogućavaju rad sa stringovima, vektorima, datotekama, formatiranim ispisom i matematičkim funkcijama.
+
+Projekat je urađen do kraja i ispunjava sve zahtjeve. Implementirane su funkcionalnosti za unos pacijenata, prikaz pacijenata, unos narudžbe lijeka i brisanje narudžbe lijeka. Također su dodane dodatne informacije o radnicima i korištenje različitih biblioteka za podršku različitim funkcionalnostima.
